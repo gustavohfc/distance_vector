@@ -24,6 +24,26 @@ def read_conf_file(file_name):
 
     return node_name, node_port_number, neighboor_list
 
+# Funcao que escreve o arquivo de configuracao, para atualizar toda vez que houver mudanca
+# Rcebe os parametros que definem o arquivo de configuracao: nome do no, porta e lista de vizinhos
+# A funcao vai escrever em um arquivo texto
+def write_conf_file(node_name, node_port_number, neighboor_list):
+    file_name = node_name + '-conf.txt' # cria o nome do arquivo
+    f = open(file_name, 'w')
+    
+    # Parametros de cabecalho do arquivo de distance vector
+    f.write(node_name)
+    f.write(node_port_number)
+    
+    # Vai escrever no arquivo os parametros que foram atualizados
+    for x in neighboor_list:
+        # constroi a string que vai ser escrita no arquivo
+        str_file = x['neighboor_name'] + ' ' + str(x['link_cost']) 
+        str_file = str_file + ' ' + x['neighboor_ip'] + '\n'
+        f.write(str_file)
+
+    f.closed
+
 # Funcao que le o arquivo de distance vector que um no recebe de outros
 # O arquivo vai conter o nome do no que enviou, numero de destinos e outras informacoes
 # A funcao vai receber o nome do arquivo e vai retornar os parametros lidos
@@ -46,28 +66,29 @@ def read_dist_vect_file(file_name):
 
 
 # Funcao que monta a tabela de roteamento, que contem: destino, custo e next hop
+#TODO
 
 # Funcao que vai criar o arquivo de distance vector de cada no
 # O arquivo vai conter o nome do no que esta enviando, numero de destinos e outras informacoes
-# A Funcao vai retornar um arquivo texto
+# A Funcao vai escrever em um arquivo texto
+# NUMBER OF DEST EH O NUMERO DE VIZINHOS QUE DADO NO TEM
 def write_dist_vect_file(node_name, number_of_dest, dist_vec_list):
     file_name = node_name + '-distance_vector.txt' # cria o nome do arquivo
     f = open(file_name, 'w')
     
     # Parametros de cabecalho do arquivo de distance vector
     f.write(node_name)
-    f.write(number_of_dest)
+    f.write(str(number_of_dest) + '\n')
     
     # Vai escrever no arquivo os custos atualizados e os destinos do no atual
     for x in dist_vec_list:
-        str_file = x['dest_name'] + '\t' + str(x['distance']) # constroi a string que vai ser escrita no arquivo
+        str_file = x['dest_name'] + '\t' + str(x['distance']) + '\n'# constroi a string que vai ser escrita no arquivo
         f.write(str_file)
 
     f.closed
 
 
-a,b,c = read_conf_file('teste.txt')
-print a
-print b
-for neigh in c:
-    print neigh
+a,b,c = read_conf_file('no1-conf.txt')
+d, e, f = read_dist_vect_file('no1-distance_vector.txt')
+write_dist_vect_file(a, 3, f)
+write_conf_file(a, b, c)
