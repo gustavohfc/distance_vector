@@ -97,7 +97,11 @@ def initialize_routing_table(neighboor_list):
 # TODO: send_dist_vector(routing_table)
 
 
-# TODO: write_routing_table(routing_table)
+def write_routing_table(routing_table):
+    with open("routing_table_log.txt", "a") as log:
+        for entry in routing_table:
+            log.write("Name: {}\t\tEndereco:{}\t\tDistance:{}\t\tNext hop:{}".format(entry['destination_name'], entry['destination_addr'], entry['distance'], entry['next_hop']))
+            log.write("\n\n\n----------------------------------------------------------------------------------------------------------------------------------------------------------\n\n\n")
 
 
 # routing_table_entry = {'destination': , 'distance': , 'next_hop': }
