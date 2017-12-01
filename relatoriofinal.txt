@@ -9,14 +9,14 @@ Victor Araújo Vieira - 14/0032801
 Artigo utilizado para o projeto: GENI-enabled Programming Experiments for Networking Classes
 
 
-O relatório é dividido em 7 tópicos:
+O relatório é dividido em 4 tópicos:
 	
 	1. Resumo da proposta do artigo;
-	2. Escopo do projeto, parâmetros definidos pelo artigo e por nós;
-	3. Dificuldades encontradas;
-	4. Resultados;
-	5. Passo a passo da implementação do projeto.
+	2. Escopo do projeto, parâmetros definidos pelo artigo e por nós, e dificuldades encontradas;
+	3. Resultados;
+	4. Passo a passo da implementação do projeto.
 
+-------------------------------------------------------------------------------------
 
 1. Resumo da proposta do artigo
 	
@@ -47,7 +47,9 @@ O relatório é dividido em 7 tópicos:
 	de disciplina, a maioria das ferramentas do GENI eram fáceis para os alunos entenderem, de forma que
 	usavam de maneira rápida e efetiva.
 
-2. Escopo do projeto, parâmetros definidos pelo artigo e por nós
+-------------------------------------------------------------------------------------
+
+2. Escopo do projeto, parâmetros definidos pelo artigo e por nós, e dificuldades encontradas
 
 	Como os dois projetos que foram propostos pelos autores foram passados em matérias com o período de 4
 	semanas para a entrega, e por algumas dificuldades presentes nos projetos, decidimos implementar 
@@ -57,3 +59,23 @@ O relatório é dividido em 7 tópicos:
 	habilidades no GENI, vamos implementar um dos protocolos mais famosos da camada de redes e ver na 
 	prática como funcionam. Além de que as duas primeiras etapas podem ser feitas no curto espaço de tempo 
 	que temos.
+
+	No projeto definido no artigo, é utilizado o ProtoGeni para gerar atualizações nos custos dos
+	links e observar o tráfego da rede, porém não conseguimos configurá-lo para nosso projeto e decidimos
+	inserir manualmente os custos dos links nos arquivos de configuração de cada nó.
+
+	O artigo também propõem a implementação utilizando C++ ou Java mas devido a familiaridade dos
+	integrantes com a socket API em Python decidimos fazer nossa implementação em Python.
+	
+	Essas serão as únicas alterações em relação ao que foi proposto no artigo, implementaremos os dois
+	primeiros passos do Distance Vector Routing Protocol em Python e com os custos inseridos manualmente.
+
+-------------------------------------------------------------------------------------
+
+3. Resultados
+
+-------------------------------------------------------------------------------------
+
+4. Passo a passo da implementação do projeto
+
+-------------------------------------------------------------------------------------
