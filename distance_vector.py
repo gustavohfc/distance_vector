@@ -24,26 +24,6 @@ def read_conf_file(file_name):
 
     return node_name, node_port_number, neighboor_list
 
-# Funcao que escreve o arquivo de configuracao, para atualizar toda vez que houver mudanca
-# Rcebe os parametros que definem o arquivo de configuracao: nome do no, porta e lista de vizinhos
-# A funcao vai escrever em um arquivo texto
-def write_conf_file(node_name, node_port_number, neighboor_list):
-    file_name = node_name + '-conf.txt' # cria o nome do arquivo
-    f = open(file_name, 'w')
-    
-    # Parametros de cabecalho do arquivo de distance vector
-    f.write(node_name)
-    f.write(node_port_number)
-    
-    # Vai escrever no arquivo os parametros que foram atualizados
-    for x in neighboor_list:
-        # constroi a string que vai ser escrita no arquivo
-        str_file = x['neighboor_name'] + ' ' + str(x['link_cost']) 
-        str_file = str_file + ' ' + x['neighboor_ip'] + '\n'
-        f.write(str_file)
-
-    f.closed
-
 # Funcao que le o arquivo de distance vector que um no recebe de outros
 # O arquivo vai conter o nome do no que enviou, numero de destinos e outras informacoes
 # A funcao vai receber o nome do arquivo e vai retornar os parametros lidos
