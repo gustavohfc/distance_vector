@@ -134,9 +134,14 @@ if __name__ == "__main__":
 
     while True:
         try:
-            data, addr = sock.recvfrom(1024)
+            data, addr = sock.recvfrom(2048)
         except socket.timeout:
-            pass
+            dist_vector = create_dist_vect(node_name, neighboor_list, routing_table)
+
+            for neighboor in neighboor_list:
+                sock.sendto(dist_vector, (neighboor['neighboor_ip'], node_port_number))
+
+            continue
 
         change = update_routing_table(routing_table, data)
 
