@@ -20,13 +20,19 @@ O relatório é dividido em 7 tópicos:
 
 1. Resumo da proposta do artigo
 	
-	O foco do artigo é mostrar como a ferramenta GENI pode ser utilizada em disciplinas que envolvem redes de computadores, para isso os autores comentam sobre suas experiências com a ferramenta nessas disciplinas por meio de dois projetos que foram propostos usando o GENI.
+	O foco do artigo é mostrar como a ferramenta GENI pode ser utilizada em disciplinas que envolvem redes 
+	de computadores, para isso os autores comentam sobre suas experiências com a ferramenta nessas 
+	disciplinas por meio de dois projetos que foram propostos usando o GENI.
 
-	O primeiro projeto é implementar um algoritmo de controle de trajetória com roteamento baseado em QoS, o projeto pode ser dividido em duas etapas.
+	O primeiro projeto é implementar um algoritmo de controle de trajetória com roteamento baseado em QoS,
+	o projeto pode ser dividido em duas etapas.
 
-	A primeira etapa é implementar uma rede onde o roteamento e o encaminhamento funcionam de maneira independente.
+	A primeira etapa é implementar uma rede onde o roteamento e o encaminhamento funcionam de maneira
+	independente.
 
-	A segunda etapa é implementar um serviço de roteamento que coleta informações de QoS dos roteadores e então repassa essa informação coletada para o algoritmo de decisão de roteamento de cada roteador, que então atualiza sua tabela de roteamento com base nos dados de QoS.
+	A segunda etapa é implementar um serviço de roteamento que coleta informações de QoS dos roteadores e
+	então repassa essa informação coletada para o algoritmo de decisão de roteamento de cada roteador, que
+	então atualiza sua tabela de roteamento com base nos dados de QoS.
 
 	O segundo projeto proposto pelo artigo é implementar o protocolo de roteamento Distance
 	Vector, utilizando UDP e o ambiente de testes do GENI para testar o protocolo.
@@ -38,10 +44,16 @@ O relatório é dividido em 7 tópicos:
 	    5. Geração de dados para a observação dos efeitos do roteamento.
 
 	Foi constatado pelos autores que após a aplicação dos projetos descritos como trabalhos
-	de disciplina, a maioria das ferramentas do GENI eram fáceis para os alunos entenderem, de forma que usavam de maneira rápida e efetiva.
+	de disciplina, a maioria das ferramentas do GENI eram fáceis para os alunos entenderem, de forma que
+	usavam de maneira rápida e efetiva.
 
 2. Escopo do projeto, parâmetros definidos pelo artigo e por nós
 
-	Como os dois projetos que foram propostos pelos autores foram passados em matérias com o período de 4 semanas para a entrega, e por algumas dificuldades presentes nos projetos, decidimos implementar apenas as duas primeiras etapas do segundo projeto.
+	Como os dois projetos que foram propostos pelos autores foram passados em matérias com o período de 4
+	semanas para a entrega, e por algumas dificuldades presentes nos projetos, decidimos implementar 
+	apenas as duas primeiras etapas do segundo projeto.
 
-	Escolhemos esse projeto e suas duas primeiras etapas, porque além de podermos trabalhar as nossas habilidades no GENI, vamos implementar um dos protocolos mais famosos da camada de redes e ver na prática como funcionam. Além de que as duas primeiras etapas podem ser feitas no curto espaço de tempo que temos.
+	Escolhemos esse projeto e suas duas primeiras etapas, porque além de podermos trabalhar as nossas
+	habilidades no GENI, vamos implementar um dos protocolos mais famosos da camada de redes e ver na 
+	prática como funcionam. Além de que as duas primeiras etapas podem ser feitas no curto espaço de tempo 
+	que temos.
