@@ -26,23 +26,19 @@ def read_conf_file(file_name):
 
     return node_name, node_port_number, neighboor_list
 
-# Funcao que le o arquivo de distance vector que um no recebe de outros
-# O arquivo vai conter o nome do no que enviou, numero de destinos e outras informacoes
-# A funcao vai receber o nome do arquivo e vai retornar os parametros lidos
-def read_dist_vect_file(file_name):
-    f = open(file_name, 'r')
-
-    sender_name = f.readline() # le a primeira linha do arquivo que eh o nome do vizinho que enviou
-    number_of_dest = int(f.readline()) # le a segunda linha do arquivo, que eh o numero de destinos
+# Funcao que recebe uma string de algum outro no e retorna o dicionario do distance vector d
+def read_dist_vect_file(dist_vector_str):
+    splited_string = dist_vector_str.splitlines()
+    
+    sender_name = splited_string[0]
+    number_of_dest = int(splited_string[1]) 
 
     dist_vec_list = []
     # loop que vai ler o distance vector do no que enviou e vai colocar em um dicionario
-    for line in f:
-        dest_name, dist = line.split()
-        dist_vec_dict = {'dest_name': dest_name, 'distance': int(dist)}
+    for i in range(2, len(splited_string)):
+        dest_name, dest_ip, dist = splited_string[i].split()
+        dist_vec_dict = {'dest_name': dest_name, 'dest_ip': dest_ip, 'distance': int(dist)}
         dist_vec_list.append(dist_vec_dict)
-
-    f.closed
 
     return sender_name, number_of_dest, dist_vec_list
 
@@ -50,24 +46,22 @@ def read_dist_vect_file(file_name):
 # Funcao que monta a tabela de roteamento, que contem: destino, custo e next hop
 #TODO
 
-# Funcao que vai criar o arquivo de distance vector de cada no
-# O arquivo vai conter o nome do no que esta enviando, numero de destinos e outras informacoes
-# A Funcao vai escrever em um arquivo texto
+# Funcao que vai criar a string de distance vector de cada no
+# A Funcao vai retornar uma string com o vetor distancia
 # NUMBER OF DEST EH O NUMERO DE VIZINHOS QUE DADO NO TEM
-def write_dist_vect_file(node_name, number_of_dest, dist_vec_list):
-    file_name = node_name + '-distance_vector.txt' # cria o nome do arquivo
-    f = open(file_name, 'w')
+def create_dist_vect(node_name, neighboor_list, routing_table):
+    number_of_dest = len(neighboor_list)
     
-    # Parametros de cabecalho do arquivo de distance vector
-    f.write(node_name)
-    f.write(str(number_of_dest) + '\n')
+    # Parametros de cabecalho da string do distance vector
+    dist_vect_str = node_name + '\n'
+    dist_vect_str = dist_vect_str + str(number_of_dest) + '\n'
     
-    # Vai escrever no arquivo os custos atualizados e os destinos do no atual
-    for x in dist_vec_list:
-        str_file = x['dest_name'] + '\t' + str(x['distance']) + '\n'# constroi a string que vai ser escrita no arquivo
-        f.write(str_file)
+    # Vai adicionar a string os custos atualizados e os destinos do no atual
+    for x in routing_table:
+        dist_vect_str = dist_vect_str + x['destination_name'] + ' ' + str(x['destination_addr']) + ' '
+        dist_vect_str = dist_vect_str + x['distance'] + ' ' + x['next_hop'] + '\n'
 
-    f.closed
+    return dist_vect_str
 
 
 
