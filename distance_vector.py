@@ -12,7 +12,7 @@ def read_conf_file(file_name):
     f = open(file_name, 'r')
 
     node_name = f.readline() # le a primeira linha do arquivo, que contem o nome do no
-    node_port_number = f.readline() # le a segunda linha do arquivo, que contem a porta UDP que o no escuta
+    node_port_number = int(f.readline()) # le a segunda linha do arquivo, que contem a porta UDP que o no escuta
 
     neighboor_list = [] 
     # loop que vai ler as informacoes dos nos vizinhos e adicionar um dicionario de cada no vizinho em uma lista
