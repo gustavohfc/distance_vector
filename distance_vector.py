@@ -71,8 +71,19 @@ def create_dist_vect(node_name, neighboor_list, routing_table):
 # TODO: Funcao que recebe uma string e retorna o dicionario do distance vector
 
 
-# TODO: initialize_routing_table(neighboor_list)
+# Funcao recebe a lista inicial de vizinhos e monta a tabela de roteamento inicial
+def initialize_routing_table(neighboor_list):
+    routing_table = []
 
+    for neighboor in neighboor_list:
+        routing_table.append({
+            'destination_name': neighboor['neighboor_name'],
+            'destination_addr': neighboor['neighboor_ip'],
+            'distance': neighboor['link_cost'],
+            'next_hop': neighboor['neighboor_name']
+        })
+
+    return routing_table
 
 # TODO: update_routing_table(routing_table, data, addr)
 
@@ -80,7 +91,11 @@ def create_dist_vect(node_name, neighboor_list, routing_table):
 # TODO: send_dist_vector(routing_table)
 
 
-# TODO: write_routing_table(routing_table)
+def write_routing_table(routing_table):
+    with open("routing_table_log.txt", "a") as log:
+        for entry in routing_table:
+            log.write("Name: {}\t\tAddress: {}\t\tDistance: {}\t\tNext hop: {}\n".format(entry['destination_name'], entry['destination_addr'], entry['distance'], entry['next_hop']))
+        log.write("\n\n\n----------------------------------------------------------------------------------------------------------------------------------------------------------\n\n\n")
 
 
 # routing_table_entry = {'destination': , 'distance': , 'next_hop': }
