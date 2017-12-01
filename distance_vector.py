@@ -66,11 +66,11 @@ def initialize_routing_table(node_name, neighboor_list):
     routing_table = []
 
     routing_table.append({
-    'destination_name': node_name,
-    'destination_addr': '127.0.0.1',
-    'distance': 0,
-    'next_hop': ''
-})
+        'destination_name': node_name.rstrip(),
+        'destination_addr': '127.0.0.1',
+        'distance': 0,
+        'next_hop': ''
+    })
 
     for neighboor in neighboor_list:
         routing_table.append({
