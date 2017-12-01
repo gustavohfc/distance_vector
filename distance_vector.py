@@ -2,6 +2,8 @@
 # Implementacao do protocol distance vector
 # Victor Vieira e Gustavo Carvalho
 
+import socket
+
 
 # Funcao que le o arquivo de configuracao de cada no na topologia sendo simulada
 # O arquivo vai conter informacoes gerais do no e quais sao seus vizinhos, bem como custo do link
@@ -68,7 +70,51 @@ def write_dist_vect_file(node_name, number_of_dest, dist_vec_list):
     f.closed
 
 
-a,b,c = read_conf_file('no1-conf.txt')
-d, e, f = read_dist_vect_file('no1-distance_vector.txt')
-write_dist_vect_file(a, 3, f)
-write_conf_file(a, b, c)
+
+# TODO: Funcao que recebe routing_table e retorna uma string para ser enviada para outro no
+
+
+# TODO: Funcao que recebe uma string e retorna o dicionario do distance vector
+
+
+# TODO: initialize_routing_table(neighboor_list)
+
+
+# TODO: update_routing_table(routing_table, data, addr)
+
+
+# TODO: send_dist_vector(routing_table)
+
+
+# TODO: write_routing_table(routing_table)
+
+
+# routing_table_entry = {'destination': , 'distance': , 'next_hop': }
+
+
+if __name__ == "__main__":
+    node_name, node_port_number, neighboor_list = read_conf_file('conf.txt')
+
+    # Inicializa o distance vector apenas com os vizinhos
+    routing_table =  initialize_routing_table(neighboor_list)
+
+    # Inicializa o socket
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.bind((socket.gethostname(), node_port_number))
+    sock.settimeout(5)
+
+    while True:
+        data, addr = sock.recvfrom(1024)
+
+        change = update_routing_table(routing_table, data, addr)
+
+        if change == True:
+            dist_vector = 
+            send_dist_vector(dist_vector)
+            write_routing_table(routing_table)
+
+
+# a,b,c = read_conf_file('no1-conf.txt')
+# d, e, f = read_dist_vect_file('no1-distance_vector.txt')
+# write_dist_vect_file(a, 3, f)
+# write_conf_file(a, b, c)
