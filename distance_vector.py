@@ -43,9 +43,6 @@ def read_dist_vect_file(dist_vector_str):
     return sender_name, number_of_dest, dist_vec_list
 
 
-# Funcao que monta a tabela de roteamento, que contem: destino, custo e next hop
-#TODO
-
 # Funcao que vai criar a string de distance vector de cada no
 # A Funcao vai retornar uma string com o vetor distancia
 # NUMBER OF DEST EH O NUMERO DE VIZINHOS QUE DADO NO TEM
@@ -54,21 +51,14 @@ def create_dist_vect(node_name, neighboor_list, routing_table):
     
     # Parametros de cabecalho da string do distance vector
     dist_vect_str = node_name + '\n'
-    dist_vect_str = dist_vect_str + str(number_of_dest) + '\n'
+    dist_vect_str += str(number_of_dest) + '\n'
     
     # Vai adicionar a string os custos atualizados e os destinos do no atual
     for x in routing_table:
-        dist_vect_str = dist_vect_str + x['destination_name'] + ' ' + x['destination_addr'] + ' '
-        dist_vect_str = dist_vect_str + str(x['distance']) + ' ' + x['next_hop'] + '\n'
+        dist_vect_str += x['destination_name'] + ' ' + x['destination_addr'] + ' '
+        dist_vect_str += str(x['distance']) + ' ' + x['next_hop'] + '\n'
 
     return dist_vect_str
-
-
-
-# TODO: Funcao que recebe routing_table e retorna uma string para ser enviada para outro no
-
-
-# TODO: Funcao que recebe uma string e retorna o dicionario do distance vector
 
 
 # Funcao recebe a lista inicial de vizinhos e monta a tabela de roteamento inicial
@@ -85,11 +75,6 @@ def initialize_routing_table(neighboor_list):
 
     return routing_table
 
-# TODO: update_routing_table(routing_table, data, addr)
-
-
-# TODO: send_dist_vector(routing_table)
-
 
 def write_routing_table(routing_table):
     with open("routing_table_log.txt", "a") as log:
@@ -98,7 +83,42 @@ def write_routing_table(routing_table):
         log.write("\n\n\n----------------------------------------------------------------------------------------------------------------------------------------------------------\n\n\n")
 
 
-# routing_table_entry = {'destination': , 'distance': , 'next_hop': }
+
+def update_routing_table(routing_table, data):
+    sender_name, number_of_dest, dist_vec_list = read_dist_vect_file(data)
+    change = False
+
+    for dist_vector in dist_vec_list:
+        node_found = False
+
+        # Encontra o no final na tabela de roteamento
+        for entry_destination in routing_table:
+            if entry_destination['destination_name'] == dist_vector['dest_name']:
+                node_found = True
+
+                # Encontra a entrada na tabela de roteamento correspondente ao vizinho que enviou o dist_vector
+                for entry_neighboor in routing_table:
+                    if sender_name == entry_neighboor['destination_name'] and entry_neighboor['distance'] + dist_vector['distance'] < entry_destination['distance']:
+                        entry_destination['distance'] = dist_vector['distance'] + entry_neighboor['distance']
+                        entry_destination['next_hop'] = entry_neighboor['destination_name']
+
+                        change = True
+
+        # Se o no de destino ainda nao esta na tabela de roteamento adiciona uma nova
+        # linha na tabela de roteamento
+        if not node_found:
+            for entry in routing_table:
+                if sender_name == entry['destination_name']:
+                    routing_table.append({
+                        'destination_name': dist_vector['dest_name'],
+                        'destination_addr': dist_vector['dest_ip'],
+                        'distance': dist_vector['distance'] + entry['distance'],
+                        'next_hop': entry['destination_name']
+                    })
+
+                    change = True
+
+    return change
 
 
 if __name__ == "__main__":
@@ -113,17 +133,18 @@ if __name__ == "__main__":
     sock.settimeout(5)
 
     while True:
-        data, addr = sock.recvfrom(1024)
+        try:
+            data, addr = sock.recvfrom(1024)
+        except socket.timeout:
+            pass
 
-        change = update_routing_table(routing_table, data, addr)
+        change = update_routing_table(routing_table, data)
 
         if change == True:
-            dist_vector = 
-            send_dist_vector(dist_vector)
+            dist_vector = create_dist_vect(node_name, neighboor_list, routing_table)
+
+            # Envia o distance para todos os vizinho
+            for neighboor in neighboor_list:
+                sock.sendto(dist_vector, (neighboor['neighboor_ip'], node_port_number))
+
             write_routing_table(routing_table)
-
-
-# a,b,c = read_conf_file('no1-conf.txt')
-# d, e, f = read_dist_vect_file('no1-distance_vector.txt')
-# write_dist_vect_file(a, 3, f)
-# write_conf_file(a, b, c)
