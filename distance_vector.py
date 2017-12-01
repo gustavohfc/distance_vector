@@ -100,8 +100,8 @@ def initialize_routing_table(neighboor_list):
 def write_routing_table(routing_table):
     with open("routing_table_log.txt", "a") as log:
         for entry in routing_table:
-            log.write("Name: {}\t\tEndereco:{}\t\tDistance:{}\t\tNext hop:{}".format(entry['destination_name'], entry['destination_addr'], entry['distance'], entry['next_hop']))
-            log.write("\n\n\n----------------------------------------------------------------------------------------------------------------------------------------------------------\n\n\n")
+            log.write("Name: {}\t\tAddress: {}\t\tDistance: {}\t\tNext hop: {}\n".format(entry['destination_name'], entry['destination_addr'], entry['distance'], entry['next_hop']))
+        log.write("\n\n\n----------------------------------------------------------------------------------------------------------------------------------------------------------\n\n\n")
 
 
 # routing_table_entry = {'destination': , 'distance': , 'next_hop': }
