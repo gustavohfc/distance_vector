@@ -50,7 +50,7 @@ def create_dist_vect(node_name, neighboor_list, routing_table):
     number_of_dest = len(neighboor_list)
     
     # Parametros de cabecalho da string do distance vector
-    dist_vect_str = node_name + '\n'
+    dist_vect_str = node_name
     dist_vect_str += str(number_of_dest) + '\n'
     
     # Vai adicionar a string os custos atualizados e os destinos do no atual
