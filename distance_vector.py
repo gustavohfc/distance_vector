@@ -77,8 +77,19 @@ def write_dist_vect_file(node_name, number_of_dest, dist_vec_list):
 # TODO: Funcao que recebe uma string e retorna o dicionario do distance vector
 
 
-# TODO: initialize_routing_table(neighboor_list)
+# Funcao recebe a lista inicial de vizinhos e monta a tabela de roteamento inicial
+def initialize_routing_table(neighboor_list):
+    routing_table = []
 
+    for neighboor in neighboor_list:
+        routing_table.append({
+            'destination_name': neighboor['neighboor_name'],
+            'destination_addr': neighboor['neighboor_ip'],
+            'distance': neighboor['link_cost'],
+            'next_hop': neighboor['neighboor_name']
+        })
+
+    return routing_table
 
 # TODO: update_routing_table(routing_table, data, addr)
 
