@@ -62,8 +62,15 @@ def create_dist_vect(node_name, neighboor_list, routing_table):
 
 
 # Funcao recebe a lista inicial de vizinhos e monta a tabela de roteamento inicial
-def initialize_routing_table(neighboor_list):
+def initialize_routing_table(node_name, neighboor_list):
     routing_table = []
+
+    routing_table.append({
+    'destination_name': node_name,
+    'destination_addr': '127.0.0.1',
+    'distance': 0,
+    'next_hop': ''
+})
 
     for neighboor in neighboor_list:
         routing_table.append({
@@ -125,7 +132,7 @@ if __name__ == "__main__":
     node_name, node_port_number, neighboor_list = read_conf_file('conf.txt')
 
     # Inicializa o distance vector apenas com os vizinhos
-    routing_table =  initialize_routing_table(neighboor_list)
+    routing_table =  initialize_routing_table(node_name, neighboor_list)
 
     # Inicializa o socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
