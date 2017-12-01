@@ -58,8 +58,8 @@ def create_dist_vect(node_name, neighboor_list, routing_table):
     
     # Vai adicionar a string os custos atualizados e os destinos do no atual
     for x in routing_table:
-        dist_vect_str = dist_vect_str + x['destination_name'] + ' ' + str(x['destination_addr']) + ' '
-        dist_vect_str = dist_vect_str + x['distance'] + ' ' + x['next_hop'] + '\n'
+        dist_vect_str = dist_vect_str + x['destination_name'] + ' ' + x['destination_addr'] + ' '
+        dist_vect_str = dist_vect_str + str(x['distance']) + ' ' + x['next_hop'] + '\n'
 
     return dist_vect_str
 
