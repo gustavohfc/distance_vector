@@ -74,6 +74,9 @@ O relatório é dividido em 4 tópicos:
 
 3. Resultados
 
+	As imagens dos resultados estão na pasta ./Resultados, e a seção 4 do relatório explica como foram 
+	feitos os procedimentos do projeto, de forma à chegar aos resultados ilustrados.
+
 -------------------------------------------------------------------------------------
 
 4. Passo a passo da implementação do projeto
