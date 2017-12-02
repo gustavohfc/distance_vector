@@ -74,6 +74,24 @@ O relatório é dividido em 4 tópicos:
 
 3. Resultados
 
+	Para ser possível visualizar a evolução das tabelas de roteamento fizemos uma função que escreve a tabela em um
+	arquivo de log (routing_table_log.txt) sempre que ocorre qualquer alteração na tabela. No nosso teste iniciamos o
+	Script em cada um dos nós de A a F em ordem alfabética, o resultado da evolução da tabela de roteamento de cada nó
+	está na pasta Resultados.
+
+	Um detalhe interessante do algoritmo Distance Vector é que ao iniciarmos o Script em um novo nó pode ocorrer mais
+	uma alteração na tabela de roteamento dos outros nós, isso se deve ao fato de estarmos usando o protocolo UDP e
+	por isso a ordem das mensagens é aleatória e também de cada nó possuir seu próprio timeout de reenvio de mensagem
+	caso tenha ocorrido a perda de algum pacote.
+	
+	Um exemplo desse comportamento pode ser visto no log da tabela de roteamento do nó A, como podemos observar as duas
+	últimas tabelas de roteamento possuem os mesmos nós sendo a única diferença o custo para o nó F, isso ocorreu porque
+	ao iniciar o Script no nó E ele informou tanto o nó C e D que existe um caminho para o nó F passando por ele e como as
+	mensagens não possuem ordem o nó A foi informado primeiro do caminho passando pelo nó C (A-B-C-E-F) com custo de 25 e
+	logo após foi informado que existe um caminho para F passando pelo nó D (A-B-D-E-F) com custo de 20, como o custo é menor
+	então ele é substituído na tabela de roteamento.
+
+
 -------------------------------------------------------------------------------------
 
 4. Passo a passo da implementação do projeto
