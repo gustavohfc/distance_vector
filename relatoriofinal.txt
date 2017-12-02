@@ -76,8 +76,8 @@ O relatório é dividido em 4 tópicos:
 
 	Para ser possível visualizar a evolução das tabelas de roteamento fizemos uma função que escreve a tabela em um
 	arquivo de log (routing_table_log.txt) sempre que ocorre qualquer alteração na tabela. No nosso teste iniciamos o
-	Script em cada um dos nós de A a F em ordem alfabética, o resultado da evolução da tabela de roteamento de cada nó
-	está na pasta Resultados.
+	Script em cada um dos nós de A a F em ordem alfabética, o resultado da evolução da tabela de 
+	roteamento de cada nó está na pasta Resultados.
 
 	Um detalhe interessante do algoritmo Distance Vector é que ao iniciarmos o Script em um novo nó pode ocorrer mais
 	uma alteração na tabela de roteamento dos outros nós, isso se deve ao fato de estarmos usando o protocolo UDP e
@@ -95,5 +95,27 @@ O relatório é dividido em 4 tópicos:
 -------------------------------------------------------------------------------------
 
 4. Passo a passo da implementação do projeto
+
+	Para a implementação do projeto, foram seguidos os seguintes passos:
+		1. Criamos a slice no GENI;
+
+		2. Alocamos os recursos necessários para o projeto, sendo eles 6 máquinas virtuais
+		da University of Texas InstaGENI, e às conectamos de forma a representar a topologia
+		ilustrada na figura ./topologiausada.jpg;
+
+		3. Implementamos o código Python que executaria o protocolo de roteamento distance vector, 
+		de acordo com o que foi especificado nas seções anteriores;
+
+		4. Em cada máquina virtual da topologia configurada, fizemos os procedimentos necessários para 
+		que o nosso código funcionasse, esses procedimentos foram:
+			4.1. Criar os arquivos de configuração especificados no artigo;
+			4.2. Baixar o código fonte Python em cada máquina, sendo que para isso, usamos
+			o comando wget {link_codigo_github};
+			4.3. Baixar os arquivos de configuração correspondentes a cada máquina, usando o 
+			comando wget {link_arquivos_github}.
+
+		5. Com tudo devidamente configurado, executamos o código e obtivemos os resultados esperados.
+
+	No final, conseguimos cumprir com o escopo especificado de forma satisfatória. 
 
 -------------------------------------------------------------------------------------
